@@ -1,0 +1,47 @@
+data_dir: gnn/data
+artifacts_dir: gnn/artifacts
+results_dir: gnn/results
+sqlite_path: gnn/artifacts/toolbench.db
+
+splits:
+  - G2
+  - G3
+
+hf_dataset: tuandunghcmut/toolbench-v1
+hf_benchmark_splits:
+  - g2_instruction
+  - g2_category
+  - g3_instruction
+
+embedder_model: sentence-transformers/all-MiniLM-L6-v2
+tool_feat_dim: 64
+bucket_emb_dim: 16
+hidden_dim: 32
+dropout: 0.2
+
+n_kmeans_buckets: 32
+max_nodes_per_bucket: 200
+min_edge_count: 2
+train_cap: 10000
+val_ratio: 0.1
+
+batch_size: 2
+lr: 0.001
+max_epochs: 100
+early_stop_patience: 10
+
+top_k: 5
+retrieval_ks: [1, 3, 5, 10]
+
+separate_gnn_top_buckets: 8
+
+gemini_model: gemini-2.5-flash-lite
+gemini_fallback_models:
+  - gemini-2.5-flash-lite
+  - gemini-2.5-flash
+  - gemini-2.0-flash-lite
+gemini_min_request_interval_s: 4.0
+gemini_daily_budget: 100
+gemini_eval_samples: 20
+
+toolbench_ir_model: ToolBench/ToolBench_IR_bert_based_uncased

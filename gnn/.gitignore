@@ -1,0 +1,10 @@
+data/
+artifacts/
+results/
+.venv/
+.env
+__pycache__/
+*.pt
+*.db
+*.pkl
+*.npy
