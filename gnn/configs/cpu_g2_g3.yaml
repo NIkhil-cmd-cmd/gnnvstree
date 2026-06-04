@@ -23,25 +23,44 @@ n_kmeans_buckets: 32
 max_nodes_per_bucket: 200
 min_edge_count: 2
 train_cap: 10000
+ranking_train_cap: 12000
+max_candidates: 48
+num_distractors: 32
 val_ratio: 0.1
+
+# Listwise ranker (aligned with benchmark api_list re-ranking)
+listwise_hidden_dim: 64
+knn_k: 4
+ranking_loss_weight: 0.5
+rank_margin: 0.3
+bm25_blend: 0.25
+ranking_epoch_samples: 3000
 
 batch_size: 2
 lr: 0.001
-max_epochs: 100
-early_stop_patience: 10
+max_epochs: 60
+early_stop_patience: 8
 
 top_k: 5
 retrieval_ks: [1, 3, 5, 10]
 
 separate_gnn_top_buckets: 8
 
+# Real agent LLM — anthropic recommended (~$0.10–2 per full eval)
+llm_provider: anthropic
+anthropic_model: claude-haiku-4-5-20251001
+llm_min_request_interval_s: 1.5
+# 25 queries × 2 conditions × up to 5 steps → need ~250 cap
+llm_daily_budget: 250
+agent_max_steps: 5
+gemini_eval_samples: 25
+
+# Optional: switch to gemini (free tier, often 429/503)
 gemini_model: gemini-2.5-flash-lite
 gemini_fallback_models:
   - gemini-2.5-flash-lite
   - gemini-2.5-flash
-  - gemini-2.0-flash-lite
 gemini_min_request_interval_s: 4.0
 gemini_daily_budget: 100
-gemini_eval_samples: 20
 
 toolbench_ir_model: ToolBench/ToolBench_IR_bert_based_uncased

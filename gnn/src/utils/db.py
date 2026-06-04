@@ -56,6 +56,19 @@ CREATE TABLE IF NOT EXISTS bucket_meta (
     bucket_key TEXT UNIQUE NOT NULL,
     split_group TEXT NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS ranking_samples (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    query_id TEXT UNIQUE NOT NULL,
+    prompt TEXT NOT NULL,
+    task_fingerprint TEXT NOT NULL,
+    bucket_id INTEGER NOT NULL,
+    candidate_keys TEXT NOT NULL,
+    label_mask TEXT NOT NULL,
+    path_order TEXT NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS idx_ranking_fingerprint ON ranking_samples(task_fingerprint);
 """
 
 

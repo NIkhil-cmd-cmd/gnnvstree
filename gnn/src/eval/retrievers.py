@@ -1,14 +1,12 @@
 from __future__ import annotations
 
 import json
-import re
 import time
 from abc import ABC, abstractmethod
 from pathlib import Path
 
-from rank_bm25 import BM25Okapi
-
 from gnn.src.infer.retrieve_tools import GNNRetriever, api_key_from_hf  # noqa: F401
+from gnn.src.utils.lexical import bm25_scores
 
 
 class BaseRetriever(ABC):
@@ -35,19 +33,9 @@ class BM25Retriever(BaseRetriever):
 
     def retrieve(self, query: str, api_list: list[dict], path: list[str] | None, top_k: int):
         t0 = time.perf_counter()
-        corpus = []
-        keys = []
-        for api in api_list:
-            keys.append(api_key_from_hf(api))
-            text = " ".join(
-                str(api.get(k, ""))
-                for k in ("category_name", "tool_name", "api_name", "api_description", "description")
-            )
-            corpus.append(re.findall(r"\w+", text.lower()))
-        bm25 = BM25Okapi(corpus)
-        q = re.findall(r"\w+", query.lower())
-        scores = bm25.get_scores(q)
-        order = sorted(range(len(scores)), key=lambda i: -scores[i])[:top_k]
+        keys = [api_key_from_hf(api) for api in api_list]
+        scores = bm25_scores(query, api_list)
+        order = scores.argsort()[::-1][:top_k]
         ms = (time.perf_counter() - t0) * 1000
         return [keys[i] for i in order], {"total_retrieval_ms": ms}
 
