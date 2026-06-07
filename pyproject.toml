@@ -1,0 +1,32 @@
+[project]
+name = "gnnvstree"
+version = "0.1.0"
+description = "Evaluation harness for tree-based and graph-based tool trace logic models."
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+data = [
+    "datasets>=5.0.0",
+    "huggingface-hub>=1.18.0",
+    "rank-bm25>=0.2.2",
+    "scikit-learn>=1.9.0",
+    "PyYAML>=6.0.3",
+    "tqdm>=4.68.1",
+]
+agent = [
+    "google-genai>=2.8.0",
+]
+all = [
+    "gnnvstree[data,agent]",
+]
+
+[project.scripts]
+gnnvstree-eval = "gnnvstree.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]

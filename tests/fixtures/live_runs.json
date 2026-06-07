@@ -1,0 +1,28 @@
+[
+  {
+    "index": 1,
+    "phase": "baseline",
+    "success": true,
+    "valid": true,
+    "exact_optimal": true,
+    "task": {"name": "live_task_a", "description": "Open site and inspect table."},
+    "trace": ["browser_navigate", "browser_snapshot", "browser_click", "browser_evaluate"],
+    "semantic_steps": ["open_home", "inspect_table", "select_row", "extract_result"],
+    "tokens": 1200,
+    "latency_ms": 30000
+  },
+  {
+    "index": 2,
+    "phase": "gnn_guided",
+    "success": false,
+    "valid": false,
+    "exact_optimal": false,
+    "task": {"name": "live_task_b", "description": "Open site and inspect form."},
+    "trace": ["browser_navigate", "browser_snapshot", "browser_click"],
+    "semantic_steps": ["open_home", "inspect_form", "submit_form"],
+    "tokens": 1400,
+    "latency_ms": 45000,
+    "error": "final answer missing"
+  }
+]
+

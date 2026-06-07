@@ -1,0 +1,16 @@
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local data, models, and experiment outputs.
+data/
+artifacts/
+results/
+runs/
+
+# macOS/editor noise.
+.DS_Store

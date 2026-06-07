@@ -1,0 +1,47 @@
+[
+  {
+    "query_id": 1,
+    "query": "Track a package and check a logistics service health endpoint.",
+    "api_list": [
+      {
+        "tool_name": "Create Container Tracking",
+        "api_name": "Get Tracking Data",
+        "api_description": "Track a container."
+      },
+      {
+        "tool_name": "SQUAKE",
+        "api_name": "Checkhealth",
+        "api_description": "Check API health."
+      },
+      {
+        "tool_name": "Distractor",
+        "api_name": "Unused API",
+        "api_description": "Should be candidate only."
+      }
+    ],
+    "relevant APIs": [
+      ["Create Container Tracking", "Get Tracking Data"],
+      ["SQUAKE", "Checkhealth"]
+    ]
+  },
+  {
+    "query_id": 2,
+    "query": "Search a product, then create an order.",
+    "api_list": [],
+    "relevant APIs": [
+      ["Catalog", "Search Product"],
+      ["Orders", "Create Order"],
+      ["Orders", "Get Order"]
+    ]
+  },
+  {
+    "query_id": 3,
+    "query": "Search a product, then create an order.",
+    "api_list": [],
+    "relevant APIs": [
+      ["Catalog", "Search Product"],
+      ["Orders", "Create Order"]
+    ]
+  }
+]
+
